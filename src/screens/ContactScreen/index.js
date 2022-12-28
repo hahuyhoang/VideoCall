@@ -18,8 +18,11 @@ const ContactScreen = () => {
     setFilteredContacts(newContacts);
   }, [searchTerm]);
 
-  const callUserItem = user => {
+  const callUserItem = (user) => {
     navigation.navigate('CallingScreen', { user });
+    console.log('====================================');
+    console.log(user);
+    console.log('====================================');
   }
   return (
     <View style={styles.page}>
@@ -32,7 +35,7 @@ const ContactScreen = () => {
       <FlatList
         data={filteredContacts}
         renderItem={({ item }) => (
-          <Pressable onPress={() => callUserItem()}>
+          <Pressable onPress={() => callUserItem(item)}>
             <Text style={styles.contactName}>{item.user_display_name}</Text>
           </Pressable>
         )}

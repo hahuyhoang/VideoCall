@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import CallActionBox from '../../Components/CallActionBox';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 const CallingScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
 
+  const user = route?.params?.user;
   const goBack = () => {
     navigation.goBack();
   };
@@ -16,8 +18,8 @@ const CallingScreen = () => {
         <Ionicons name="chevron-back" color="white" size={30} />
       </Pressable>
       <View style={styles.cameraPreview}>
-        <Text style={styles.name}>Alex</Text>
-        <Text style={styles.phoneNumber}>ringing 1233344 2311</Text>
+        <Text style={styles.name}>{user?.user_display_name}</Text>
+        <Text style={styles.phoneNumber}>ringing +123 334 423 113</Text>
       </View>
       <CallActionBox />
     </View>
@@ -63,6 +65,6 @@ const styles = StyleSheet.create({
   buttonBack: {
     position: 'absolute',
     padding: 10,
-    backgroundColor: 'red'
+    zIndex: 10,
   },
 });
