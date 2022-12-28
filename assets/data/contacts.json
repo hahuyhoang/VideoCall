@@ -22,12 +22,12 @@
   {
     "user_id": "5",
     "user_name": "joe",
-    "user_display_name": "Joe"
+    "user_display_name": "Joe Here"
   },
   {
     "user_id": "6",
     "user_name": "peter",
-    "user_display_name": "Peter"
+    "user_display_name": "Peter Joe"
   },
   {
     "user_id": "7",

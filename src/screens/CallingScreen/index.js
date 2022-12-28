@@ -1,9 +1,20 @@
-import {View, Text, StyleSheet} from 'react-native';
+/* eslint-disable prettier/prettier */
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import CallActionBox from '../../Components/CallActionBox';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/core';
 const CallingScreen = () => {
+  const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.page}>
+      <Pressable onPress={goBack} style={styles.buttonBack}>
+        <Ionicons name="chevron-back" color="white" size={30} />
+      </Pressable>
       <View style={styles.cameraPreview}>
         <Text style={styles.name}>Alex</Text>
         <Text style={styles.phoneNumber}>ringing 1233344 2311</Text>
@@ -48,5 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#4a4a4a',
     padding: 15,
     borderRadius: 50,
+  },
+  buttonBack: {
+    position: 'absolute',
+    padding: 10,
+    backgroundColor: 'red'
   },
 });

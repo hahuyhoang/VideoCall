@@ -1,17 +1,12 @@
-import React from 'react';
+// In App.js in a new project
 
-import {SafeAreaView, View} from 'react-native';
+import * as React from 'react';
+import Navigation from './src/navigation';
 
-import Navigation from './src/Components/navigation';
-import CallingScreen from './src/screens/CallingScreen';
 
-const App = () => {
-  return (
-    <SafeAreaView>
-      {/* <Navigation /> */}
-      {/* <CallingScreen /> */}
-    </SafeAreaView>
-  );
-};
+
+function App() {
+  return <Navigation />;
+}
 
 export default App;
