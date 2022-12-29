@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Image,
   StyleSheet,
@@ -6,26 +7,50 @@ import {
   ImageBackground,
   Pressable,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import bg from '../../../assets/images/ios_bg.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Voximplant } from 'react-native-voximplant';
 
 const IncomingCalling = () => {
+  const [caller, setCaller] = useState('')
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { call } = route.params;
+
+  useEffect(() => {
+    setCaller(call.getEndpoints()[0].displayName);
+
+    call.on(Voximplant.CallEvents.Disconnected, callEvent => {
+      navigation.navigate('Contacts');
+    });
+
+
+    return () => {
+      call.off(Voximplant.CallEvents.Disconnected);
+    }
+  }, []);
+
   const onDecline = () => {
-    console.warn('onDecline');
+    call.decline()
   };
   const onAccept = () => {
-    console.warn('onAccept');
+    navigation.navigate('CallingScreen',
+    {
+      call,
+      isIncomingCall: true,
+    })
   };
   return (
     <View style={styles.root}>
       <ImageBackground source={bg} style={styles.bg} resizeMode="cover">
-        <Text style={styles.name}>Huy Hoang</Text>
+        <Text style={styles.name}>{caller}</Text>
         <Text style={styles.phoneNumber}>FaceTime video...</Text>
 
-        <View style={[styles.row, {marginTop: 'auto'}]}>
+        <View style={[styles.row, { marginTop: 'auto' }]}>
           <View style={styles.iconsContainer}>
             <Ionicons name="alarm" size={30} color={'white'} />
             <Text style={styles.iconsText}>Remind me</Text>
@@ -49,7 +74,7 @@ const IncomingCalling = () => {
             <View
               style={[
                 styles.iconsButtonContainer,
-                {backgroundColor: '#2e7bff'},
+                { backgroundColor: '#2e7bff' },
               ]}>
               <Feather name="check" size={40} color={'white'} />
             </View>

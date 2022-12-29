@@ -15,7 +15,7 @@ const ContactScreen = () => {
 
   useEffect(() => {
     voximplant.on(Voximplant.ClientEvents.IncomingCall, incomingCallEvent => {
-      navigation.navigate('IncomingCall');
+      navigation.navigate('IncomingCall', {call: incomingCallEvent.call});
     });
      return () => {
       voximplant.off(Voximplant.ClientEvents.IncomingCall);
