@@ -21,7 +21,7 @@ const ContactScreen = () => {
   const callUserItem = (user) => {
     navigation.navigate('CallingScreen', { user });
     console.log('====================================');
-    console.log(user);
+    console.log(user.user_name);
     console.log('====================================');
   }
   return (
