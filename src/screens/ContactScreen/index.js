@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-na
 import React, { useEffect, useState } from 'react';
 import dummyContacts from '../../../assets/data/contacts.json';
 import { useNavigation } from '@react-navigation/core';
+import { Voximplant } from 'react-native-voximplant';
 
 
 const ContactScreen = () => {
@@ -10,6 +11,16 @@ const ContactScreen = () => {
   const [filteredContacts, setFilteredContacts] = useState(dummyContacts);
 
   const navigation = useNavigation();
+  const voximplant = Voximplant.getInstance();
+
+  useEffect(() => {
+    voximplant.on(Voximplant.ClientEvents.IncomingCall, incomingCallEvent => {
+      navigation.navigate('IncomingCall');
+    });
+     return () => {
+      voximplant.off(Voximplant.ClientEvents.IncomingCall);
+     }
+  })
 
   useEffect(() => {
     const newContacts = dummyContacts.filter(contact =>
@@ -20,9 +31,6 @@ const ContactScreen = () => {
 
   const callUserItem = (user) => {
     navigation.navigate('CallingScreen', { user });
-    console.log('====================================');
-    console.log(user.user_name);
-    console.log('====================================');
   }
   return (
     <View style={styles.page}>

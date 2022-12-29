@@ -12,7 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 
-const IncommingCalling = () => {
+const IncomingCalling = () => {
   const onDecline = () => {
     console.warn('onDecline');
   };
@@ -61,7 +61,7 @@ const IncommingCalling = () => {
   );
 };
 
-export default IncommingCalling;
+export default IncomingCalling;
 
 const styles = StyleSheet.create({
   root: {
